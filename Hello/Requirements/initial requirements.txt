@@ -1,0 +1,68 @@
+Low-level system design provides the necessary details for developers to implement the system.
+It often includes pseudocode or code snippets, data structure diagrams, and detailed
+ specifications for each module.
+
+In summary, high-level system design is about creating an architectural overview of the system,
+while low-level system design involves specifying the nitty-gritty details of how each part of
+the system will work. Both phases are crucial in the development process to ensure that the
+system is well-structured, maintainable, and meets its requirements.
+
+
+1.  Understand the requirements
+    a. what type of vehicle will use the parking lot - cars, motorbikes, trucks
+    b. how many parking spots will be required by each vehicle.
+    c. Is the parking lot open 24/7, or are there specific operating hours?
+    d. Do you need to handle reservations or just first-come, first-served parking?
+    e. Is there a fee for parking? If so, how is it calculated and collected?
+    f. Are there any special features like handicapped spots or electric vehicle charging stations?
+    g. Do you need to support multiple entrances and exits?
+
+Step 2: Define the Components
+Identify the key components of the parking lot system. These typically include:
+    - Parking Lot
+    - Vehicles - car, bike, truck
+    - Parking Spots - different parking or same
+    - Entrance/Exit Gates - NOT REQUIRED RIGHT NOW
+    - Ticketing/Reservation System - yes or no
+    - Payment System - online/offline
+    - Monitoring and Reporting - which space is vacant or going to be vacant or occupied
+
+Step 3: Define the Interfaces
+    - Specify how these components will interact with each other. For example:
+    - Vehicles enter the parking lot through the entrance gate.
+    - The ticketing system issues a ticket or reservation.
+    - Vehicles find an available parking spot.
+    - When leaving, vehicles go through the exit gate and make a payment if required. That parking
+        space will get vacant
+
+Step 4: Design the Data Model
+
+    - Define the data structures needed to represent parking spots, tickets, reservations, and any other relevant entities.
+    - Consider using classes, tables, or data structures like dictionaries or arrays to organize this data.
+
+    Ans - using vector/array + queue
+        - at the time of de-allocation of space - then we will charge fee.
+        - max time to allot a vehicle - every vehicle will have same time limit.
+        - price[4] - will contain price which will be used to calculate fee of each vehicle
+            based on number of hrs they are booking slot.
+
+
+        vector<string>adj[4];       - option 1 - this will be used because of shivani ke nakhre
+            - value will be string containing time
+            - this will be used to calculate fee + fine(if any)
+            - queue<int> will be used to store vacant/available spaces
+
+        vector<vector<int>> v(4);   - option 2
+
+        ->> can be hardcoded - or asked at the time of creation of data structure
+        v[1] - bikes - 100 elements
+        v[2] - cars - 50 elements
+        v[3] - trucks - 20 elements
+
+
+        - no need of constructor - because we are having one object
+
+
+
+
+
