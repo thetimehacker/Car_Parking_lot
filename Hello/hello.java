@@ -5,10 +5,10 @@ import java.time.*;
 
 public class hello {
     //    static ArrayList<String>[] parking_spot = new ArrayList[4]; // -skr
-    static ArrayList<String> parking_spot = new ArrayList();
-    static ArrayList<String> vehicle_id = new ArrayList(5000);
-    static int[] fee=new int[3];
-    static int car=100, bike=200,truck=50;
+    static ArrayList<String> parking_spot = new ArrayList<>();
+    //angular brackets <> are used to specify datatype -> ArrayList<>()
+    static ArrayList<String> vehicle_id = new ArrayList<>();
+//    static int[] fee=new int[3];
 
 
     // queue to store available parking slots
@@ -71,14 +71,14 @@ public class hello {
             return;
         }
 
-        switch(vt){
-            case 1: {
+        switch (vt) {
+            case 1 -> {
                 //using poll() function to get the element and delete it from the queue
                 if (!qb.isEmpty()) {
                     int index = qb.poll(); // pop element from the queue and store it in this
                     parking_spot.add(index, ct); // add time to this spot for bike
-                    vehicle_id.add(index,vno);
-                    m.put(vno,index);
+                    vehicle_id.add(index, vno);
+                    m.put(vno, index);
                     System.out.println("------>> Parking Slot booked :) ");
                     System.out.print("------>> bike timing : ");
                     System.out.print(ct);
@@ -86,16 +86,14 @@ public class hello {
                     System.out.println("------>> No Parking Slot available :( ");
                 }
             }
-            break;
-
-            case 2: {
+            case 2 -> {
                 //using poll() function to get the element and delete it from the queue
 
                 if (!qc.isEmpty()) {
                     int index = qc.poll(); // pop element from the queue and store it in this
                     parking_spot.add(index, ct); // add time to this spot for bike
-                    vehicle_id.add(index,vno);
-                    m.put(vno,index);
+                    vehicle_id.add(index, vno);
+                    m.put(vno, index);
                     System.out.println("------>> Parking Slot booked :) ");
                     System.out.print("------>> car timing : ");
                     System.out.print(parking_spot.get(index));
@@ -103,15 +101,13 @@ public class hello {
                     System.out.println("------>> No Parking Slot available :( ");
                 }
             }
-            break;
-
-            case 3: {
+            case 3 -> {
                 //using poll() function to get the element and delete it from the queue
                 if (!qt.isEmpty()) {
                     int index = qt.poll(); // pop element from the queue and store it in this
                     parking_spot.add(index, ct); // add time to this spot for bike
-                    vehicle_id.add(index,vno);
-                    m.put(vno,index);
+                    vehicle_id.add(index, vno);
+                    m.put(vno, index);
                     System.out.println("------>> Parking Slot booked :) ");
                     System.out.print("------>> truck timing : ");
                     System.out.print(ct);
@@ -119,11 +115,33 @@ public class hello {
                     System.out.println("------>> No Parking Slot available :( ");
                 }
             }
-            break;
         }
     }
 
     public static void delete(){
+
+        //Printing a list to show user
+        boolean messageb=true, messagec=true, messaget=true;
+        for(int i=1;i<=350;i++){
+            if(i<=200 && messageb) {
+                    System.out.println("Bikes");
+                    messageb = false;
+            }
+            if(i>200 && messagec){
+                System.out.println("Cars");
+                messagec = false;
+            }
+            if(i>300 && messaget){
+                System.out.println("Trucks");
+                messaget=false;
+            }
+            if(!Objects.equals(parking_spot.get(i), "empty")){
+                System.out.println(i+" "+vehicle_id.get(i)+" "+parking_spot.get(i));
+            }
+        }
+
+        System.out.println();
+
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter Vehicle number to delete : ");
         String vid = sc.nextLine(); // get vehicle number to delete it from the database
@@ -162,8 +180,18 @@ public class hello {
             // parking_spot.remove(vid);
             // instead of remove - add empty to the string
 
-            parking_spot.add(index,"empty");
-            vehicle_id.add(index,"empty");
+
+            //----------------------------------------------------------
+            //---->>>>> CODE WHICH WAS CREATING ISSUES
+            //parking_spot.add(index,"empty");
+            //vehicle_id.add(index,"empty");
+
+            //----->>>> PERFECT CODE - to use set to update values not add
+            parking_spot.set(index,"empty");
+            vehicle_id.set(index,"empty");
+
+            //------------------------------------------------------------
+
 
             // add this index back to the queue
             if(index<=200)qb.add(index);
@@ -198,32 +226,23 @@ public class hello {
             System.out.println();
 
             boolean flag_to_exit = false;
-            switch(choice){
-                case 1: {
+            switch (choice) {
+                case 1 -> {
                     add();
                 }
-                break;
-
-                case 2:{
+                case 2 -> {
                     delete();
                 }
-                break;
-
-                case 3:{
-                    flag_to_exit= true;
+                case 3 -> {
+                    flag_to_exit = true;
                 }
-                break;
-
-                default :
-                {
+                default -> {
                     System.out.println(" ----> Wrong Choice :( ");
                 }
-                break;
             }
 
             if(flag_to_exit)break;
         }
 
     }
-    // I wanna be a devil
 }
