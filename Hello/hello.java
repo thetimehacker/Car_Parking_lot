@@ -137,7 +137,7 @@ public class hello {
             }
             if(!Objects.equals(parking_spot.get(i), "empty")){
                 System.out.println(i+" "+vehicle_id.get(i)+" "+parking_spot.get(i));
-            }
+            }`
         }
 
         System.out.println();
